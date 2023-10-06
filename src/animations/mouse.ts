@@ -11,8 +11,6 @@ export const mouse = () => {
   elements.forEach((element) => {
     const cursorClass = element.dataset.mouseClass ?? 'cc-click';
 
-    console.log(element, cursorClass);
-
     element.addEventListener('mouseenter', () => {
       const text = element.dataset.mouseText ?? 'View Case';
       if (mouseText) mouseText.textContent = text;
