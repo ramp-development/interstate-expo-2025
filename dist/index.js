@@ -8487,8 +8487,10 @@
     if (!trigger)
       return;
     const links = queryElements("a").filter((link) => {
-      return link.hostname === window.location.hostname;
+      const url = new URL(link.href);
+      return url.origin === location.origin && url.pathname !== location.pathname;
     });
+    console.log(links);
     links.forEach((link) => {
       link.addEventListener("click", (event) => {
         event.preventDefault();
@@ -8531,37 +8533,39 @@
     const navLinksWrap = queryElement(".nav_links", nav3);
     const navLinks = queryElements(".nav_link", nav3);
     const navLinkBG = queryElement(".nav_link-bg", nav3);
-    if (!navMenuButton || !navLinksWrap || !navLinks || !navLinkBG)
-      return;
-    navMenuButton.style.width = "4em";
-    navMenuButton.style.height = "22px";
-    let activeLink = getActiveLink(navLinks);
-    activeLink?.prepend(navLinkBG);
-    navLinks.forEach((navLink) => {
-      navLink.addEventListener("mouseenter", () => {
+    if (navMenuButton) {
+      navMenuButton.style.width = "4em";
+      navMenuButton.style.height = "22px";
+    }
+    if (navLinkBG && navLinksWrap) {
+      let activeLink = getActiveLink(navLinks);
+      activeLink?.prepend(navLinkBG);
+      navLinks.forEach((navLink) => {
+        navLink.addEventListener("mouseenter", () => {
+          if (mouse2)
+            mouse2.style.mixBlendMode = "difference";
+          const state = Flip.getState(navLinkBG);
+          navLink.prepend(navLinkBG);
+          Flip.from(state, {
+            duration: 0.75,
+            ease: "power2.out"
+          });
+        });
+      });
+      navLinksWrap.addEventListener("mouseleave", () => {
         if (mouse2)
-          mouse2.style.mixBlendMode = "difference";
+          mouse2.style.removeProperty("mix-blend-mode");
+        activeLink = getActiveLink(navLinks);
+        if (!activeLink)
+          return;
         const state = Flip.getState(navLinkBG);
-        navLink.prepend(navLinkBG);
+        activeLink.prepend(navLinkBG);
         Flip.from(state, {
-          duration: 0.75,
+          duration: 1,
           ease: "power2.out"
         });
       });
-    });
-    navLinksWrap.addEventListener("mouseleave", () => {
-      if (mouse2)
-        mouse2.style.removeProperty("mix-blend-mode");
-      activeLink = getActiveLink(navLinks);
-      if (!activeLink)
-        return;
-      const state = Flip.getState(navLinkBG);
-      activeLink.prepend(navLinkBG);
-      Flip.from(state, {
-        duration: 1,
-        ease: "power2.out"
-      });
-    });
+    }
   };
 
   // src/components/index.ts

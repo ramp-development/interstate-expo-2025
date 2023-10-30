@@ -7,8 +7,11 @@ export const transitions = () => {
   if (!trigger) return;
 
   const links = queryElements<HTMLAnchorElement>('a').filter((link) => {
-    return link.hostname === window.location.hostname;
+    const url = new URL(link.href);
+    return url.origin === location.origin && url.pathname !== location.pathname;
   });
+
+  console.log(links);
 
   links.forEach((link) => {
     link.addEventListener('click', (event) => {
