@@ -53,8 +53,7 @@ export const home = () => {
 
     // If not a first time visit in this tab
     if (sessionStorage.getItem('visited') !== null) {
-      duration = 0.1;
-      counter.value = 50;
+      duration = 1;
     }
 
     sessionStorage.setItem('visited', 'true');

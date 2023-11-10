@@ -1,3 +1,4 @@
+import gsap from 'gsap/all';
 import { Flip } from 'gsap/Flip';
 
 import { getActiveLink } from '$utils/getActiveLink';
@@ -26,22 +27,31 @@ export const nav = () => {
     let activeLink = getActiveLink(navLinks);
     activeLink?.prepend(navLinkBG);
 
+    // duration
+    const duration = 0.75;
+
+    // create timeline for navLinkBG to grow on move
+    const timeline = gsap
+      .timeline()
+      .to(navLinkBG, { scaleX: 1.1, duration: duration / 2 })
+      .to(navLinkBG, { scaleX: 1, duration: duration / 2 });
+
     // handle the flip on nav link hover in
     navLinks.forEach((navLink) => {
       navLink.addEventListener('mouseenter', () => {
-        if (mouse) mouse.style.mixBlendMode = 'difference';
+        // if (mouse) mouse.style.mixBlendMode = 'difference';
         const state = Flip.getState(navLinkBG);
         navLink.prepend(navLinkBG);
         Flip.from(state, {
-          duration: 0.75,
+          duration,
           ease: 'power2.out',
-        });
+        }).add(timeline, 0);
       });
     });
 
     // reset the flip on hover out of all links
     navLinksWrap.addEventListener('mouseleave', () => {
-      if (mouse) mouse.style.removeProperty('mix-blend-mode');
+      // if (mouse) mouse.style.removeProperty('mix-blend-mode');
       activeLink = getActiveLink(navLinks);
       if (!activeLink) return;
 
@@ -50,7 +60,7 @@ export const nav = () => {
       Flip.from(state, {
         duration: 1,
         ease: 'power2.out',
-      });
+      }).add(timeline, 0);
     });
   }
 };
