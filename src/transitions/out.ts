@@ -1,6 +1,8 @@
 import { queryElement } from '$utils/queryElement';
 import { queryElements } from '$utils/queryElements';
 
+import { Page, pages } from './pages';
+
 export const transitionOut = () => {
   console.log('transitionOut');
 
@@ -16,68 +18,6 @@ export const transitionOut = () => {
     attr: 'data-transition',
     value: 'out',
   };
-
-  // define the required details for each page
-  interface Page {
-    name: string;
-    slug: string;
-    loader: {
-      name: 'home' | 'logo' | 'wordmark';
-      color: 'dark' | 'light';
-    };
-  }
-
-  // create a directory of pages
-  const pages: Page[] = [
-    {
-      name: 'home',
-      slug: '/',
-      loader: {
-        name: 'logo',
-        color: 'dark',
-      },
-    },
-    {
-      name: 'cases',
-      slug: '/cases',
-      loader: {
-        name: 'logo',
-        color: 'light',
-      },
-    },
-    {
-      name: 'services',
-      slug: '/services',
-      loader: {
-        name: 'logo',
-        color: 'light',
-      },
-    },
-    {
-      name: 'design trial',
-      slug: '/design-trial',
-      loader: {
-        name: 'logo',
-        color: 'light',
-      },
-    },
-    {
-      name: 'fintech design',
-      slug: '/fintech-design',
-      loader: {
-        name: 'logo',
-        color: 'dark',
-      },
-    },
-    {
-      name: 'cases',
-      slug: '/cases/',
-      loader: {
-        name: 'wordmark',
-        color: 'dark',
-      },
-    },
-  ];
 
   // get all trigger elements
   const trigger = queryElement<HTMLDivElement>(`[${config.attr}=${config.value}]`);

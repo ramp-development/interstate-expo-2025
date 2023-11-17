@@ -17,11 +17,11 @@ export const home = () => {
    */
 
   // get elements
-  const revealAttribute = 'data-reveal';
-  const wrapper = queryElement<HTMLDivElement>(`[${revealAttribute}="wrapper"]`);
-  const transitionEl = queryElement<HTMLDivElement>(`[${revealAttribute}="transition"]`, wrapper);
-  const loaderEl = queryElement<HTMLDivElement>(`[${revealAttribute}="loader"]`, wrapper);
-  const close = queryElement<HTMLDivElement>(`[${revealAttribute}="close"]`, wrapper);
+  const loaderAttr = 'data-loader';
+  const transitionAttr = 'data-transition';
+  const component = queryElement<HTMLDivElement>(`[${loaderAttr}="component"]`);
+  const loaderEl = queryElement<HTMLDivElement>(`[${loaderAttr}="loader"]`, component);
+  const close = queryElement<HTMLDivElement>(`[${loaderAttr}="close"]`, component);
 
   console.log(referrer, window.location.hostname);
   if (referrer.includes(window.location.hostname)) {
