@@ -1,12 +1,2 @@
 export { buttons } from './buttons';
-export { fadeUp } from './fadeUp';
-export { fadeUpChildren } from './fadeUpChildren';
-export { features } from './features';
-export { icons } from './icons';
-export { slideUp } from './slideUp';
-export { slideUpChildren } from './slideUpChildren';
-export { splitChars } from './splitChars';
-export { splitCharsOut } from './splitCharsOut';
 export { splitLines } from './splitLines';
-export { splitLinesOut } from './splitLinesOut';
-export { splitWords } from './splitWords';

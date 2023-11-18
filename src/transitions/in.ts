@@ -1,4 +1,6 @@
 import { simulateEvent } from '@finsweet/ts-utils';
+import { gsap } from 'gsap';
+import { CustomEase } from 'gsap/CustomEase';
 
 import { queryElement } from '$utils/queryElement';
 import { queryElements } from '$utils/queryElements';
@@ -30,8 +32,13 @@ export const transitionIn = () => {
   }
   if (!page) return;
 
-  if (page.name !== 'home') clickTriggers();
+  // if not the home page, click triggers immediately and finish
+  if (page.name !== 'home') {
+    transitionAnimations();
+    return;
+  }
 
+  // otherwise, decide which animation to play
   const loaderEl = queryElement<HTMLDivElement>(`[${config.loaderAttr}="loader"]`);
   const close = queryElement<HTMLDivElement>(`[${config.loaderAttr}="close"]`);
   const transitionEl = queryElement<HTMLDivElement>(`[${config.transitionAttr}="logo"]`);
@@ -43,12 +50,14 @@ export const transitionIn = () => {
   }
 
   function transition() {
+    console.log('transition');
     if (loaderEl) loaderEl.remove();
     if (close) simulateEvent(close, 'click');
-    clickTriggers();
+    transitionAnimations();
   }
 
   function loader() {
+    console.log('loader');
     if (transitionEl) transitionEl.remove();
 
     const customEase =
@@ -61,7 +70,7 @@ export const transitionIn = () => {
     if (!loaderText || !loaderBackground) return;
 
     // If not a first time visit in this tab
-    if (sessionStorage.getItem('visited') !== null) duration = 1;
+    if (sessionStorage.getItem('visited') !== null) duration = 2;
     sessionStorage.setItem('visited', 'true');
 
     const updateLoaderText = () => {
@@ -71,6 +80,7 @@ export const transitionIn = () => {
 
     const endLoaderAnimation = () => {
       if (close) simulateEvent(close, 'click');
+      transitionAnimations();
     };
 
     const timeline = gsap.timeline({
@@ -95,14 +105,19 @@ export const transitionIn = () => {
       );
   }
 
-  function clickTriggers() {
+  function transitionAnimations() {
+    console.log('clicking triggers');
     // get all trigger elements
     const triggers = queryElements<HTMLDivElement>(`[${config.transitionAttr}=${config.value}]`);
     if (triggers.length === 0) return;
 
-    // click them after the page transition animation is complete
+    // Create the custom event
+    const transitionAnimationEvent = new CustomEvent('transitionAnimationEvent');
+
+    // click the triggers and dispatch the event
     setTimeout(() => {
       triggers.forEach((trigger) => trigger.click());
+      document.dispatchEvent(transitionAnimationEvent);
     }, config.timeout);
   }
 };

@@ -19,6 +19,15 @@ export const groups = () => {
     const trigger = group.dataset.animationTrigger;
     if (trigger) start = trigger;
 
+    // format for rich text
+    const richText = queryElement<HTMLDivElement>(`[${attr}="rich-text"]`, group);
+    if (richText) {
+      const headings = queryElements<HTMLHeadingElement>('h1, h2, h3, h4, h5, h6', richText);
+      headings.forEach((heading) => {
+        heading.dataset.animationElement = 'title';
+      });
+    }
+
     // reference to elements
     const title = queryElement<HTMLHeadingElement>(`[${attr}="title"]`, group);
     const buttonGroup = queryElement<HTMLDivElement>(`[${attr}="button-group"]`, group);
@@ -32,6 +41,24 @@ export const groups = () => {
         onRefresh,
       },
     });
+
+    if (trigger !== 'transition') {
+      const groupTrigger = ScrollTrigger.create({
+        animation: timeline,
+        trigger: group,
+        start,
+        onload,
+        onRefresh,
+      });
+    } else {
+      // Add an event listener for the custom event
+      document.addEventListener('transitionAnimationEvent', function () {
+        console.log('transitionAnimationEvent');
+        setTimeout(() => {
+          timeline.play();
+        }, 1000);
+      });
+    }
 
     if (title) utils.splitLines(title, timeline, '0');
     if (buttonGroup) utils.buttons(buttonGroup, timeline, '-=50%');
