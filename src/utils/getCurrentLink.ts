@@ -4,6 +4,6 @@
  * @returns The active link
  */
 
-export const getActiveLink = (links: HTMLAnchorElement[]): HTMLAnchorElement | undefined => {
+export const getCurrentLink = (links: HTMLAnchorElement[]): HTMLAnchorElement | undefined => {
   return links.find((link) => link.classList.contains('w--current'));
 };

@@ -8,7 +8,6 @@ import * as utils from './utils';
 
 export const groups = () => {
   const defaults = { duration: 1, ease: 'power2.out', stagger: 0.1 };
-  let start = 'top 60%';
   const onload = (self) => self.progress === 1 && self.animation.progress(1);
   const onRefresh = (self) => self.progress === 1 && self.animation.progress(1);
 
@@ -16,6 +15,7 @@ export const groups = () => {
   const groups = queryElements<HTMLDivElement>(`[${attr}="group"]`);
 
   groups.forEach((group) => {
+    let start = 'top 60%';
     const trigger = group.dataset.animationTrigger;
     if (trigger) start = trigger;
 

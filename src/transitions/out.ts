@@ -52,17 +52,26 @@ export const transitionOut = () => {
         page = pages.find((page) => page.slug === link.pathname);
       }
 
+      // load the link if no page is found
       if (!page) {
         loadLink(link);
         return;
       }
 
+      // get the loader for that page from the directory and load the page if the loader is not found
       const loader = queryElement<HTMLDivElement>(`[${config.attr}=${page.loader.name}]`);
       if (!loader) {
         loadLink(link);
         return;
       }
 
+      // get all loaders on the page and hide them
+      const loaders = queryElements<HTMLDivElement>(`[${config.attr}]`);
+      loaders.forEach((loader) => {
+        loader.style.display = 'none';
+      });
+
+      // set the color variables to the appropriate values
       if (page.loader.color === 'light') {
         loader.style.setProperty('--transition--background', 'var(--swatch--white)');
         loader.style.setProperty('--transition--main', 'var(--swatch--black)');
@@ -71,8 +80,10 @@ export const transitionOut = () => {
         loader.style.setProperty('--transition--main', 'var(--swatch--white)');
       }
 
+      // show the relevant loader
       loader.style.display = 'flex';
 
+      // trigger the transition out
       trigger.click();
       setTimeout(() => {
         loadLink(link);
