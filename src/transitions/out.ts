@@ -26,7 +26,9 @@ export const transitionOut = () => {
   // get all links to other pages of Basis
   const links = queryElements<HTMLAnchorElement>('a').filter((link) => {
     const url = new URL(link.href);
-    return url.origin === location.origin && url.pathname !== location.pathname;
+    if (url.origin !== location.origin) return false;
+    if (url.pathname !== location.pathname) return true;
+    if (!url.hash) return true;
   });
 
   /**
