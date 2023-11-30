@@ -35,6 +35,16 @@ export const cases = () => {
       x: -length,
     });
 
+    window.addEventListener(
+      'wheel',
+      function (event) {
+        if (event.deltaX !== 0 && event.deltaY === 0) {
+          window.scrollBy(0, event.deltaX);
+        }
+      },
+      { passive: true }
+    );
+
     return () => {
       component.style.removeProperty('height');
     };
