@@ -46,6 +46,10 @@ export const transitionOut = () => {
       event.preventDefault();
       event.stopPropagation();
 
+      // get and remove the mouse
+      const mouse = queryElement<HTMLDivElement>('.mouse');
+      if (mouse) mouse.remove();
+
       // get the page we're going to
       let page: Page | undefined = undefined;
       if (link.pathname.includes('/cases/')) {
