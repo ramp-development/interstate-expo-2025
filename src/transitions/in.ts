@@ -63,7 +63,7 @@ export const transitionIn = () => {
     const customEase =
       'M0,0,C0.061,0.186,0.198,0.488,0.482,0.568,0.564,0.591,0.741,0.561,0.882,0.668,1.009,0.765,0.986,1,1,1';
     const counter = { value: 0 };
-    let duration = 6;
+    let duration = 4;
 
     const loaderText = queryElement<HTMLDivElement>(`[${config.loaderAttr}="text"]`);
     const loaderBackground = queryElement<HTMLDivElement>(`[${config.loaderAttr}="background"]`);
