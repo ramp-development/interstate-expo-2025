@@ -16,4 +16,9 @@ window.Webflow.push(() => {
   pages();
   initComponents();
   animations();
+
+  // if the page is scrolled less that 100px, scroll to the top
+  setTimeout(() => {
+    if (window.scrollY < window.innerHeight / 3) window.scrollTo(0, 0);
+  }, 800);
 });

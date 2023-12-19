@@ -49,6 +49,8 @@ export const transitionIn = () => {
     loader();
   }
 
+  // homeHeroReveal();
+
   function transition() {
     console.log('transition');
     if (loaderEl) loaderEl.remove();
