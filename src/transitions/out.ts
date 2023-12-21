@@ -21,6 +21,7 @@ export const transitionOut = () => {
 
   // get all trigger elements
   const trigger = queryElement<HTMLDivElement>(`[${config.attr}=${config.value}]`);
+  console.log(trigger);
   if (!trigger) return;
 
   // get all links to other pages of Basis
@@ -30,6 +31,8 @@ export const transitionOut = () => {
     if (url.pathname !== location.pathname) return true;
     if (!url.hash) return true;
   });
+
+  console.log(links);
 
   /**
    * link is clicked
