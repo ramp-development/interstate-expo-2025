@@ -53,7 +53,6 @@ export const groups = () => {
     } else {
       // Add an event listener for the custom event
       document.addEventListener('transitionAnimationEvent', function () {
-        console.log('transitionAnimationEvent');
         setTimeout(() => {
           timeline.play();
         }, 1000);

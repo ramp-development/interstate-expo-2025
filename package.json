@@ -54,6 +54,7 @@
   "dependencies": {
     "@finsweet/ts-utils": "^0.39.0",
     "@splidejs/splide": "^4.1.4",
+    "@studio-freight/lenis": "^1.0.33",
     "@vimeo/player": "^2.20.1",
     "browser-dtector": "^3.3.0",
     "gsap": "file:gsap-bonus.tgz"

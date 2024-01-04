@@ -3,8 +3,6 @@ import { gsap } from 'gsap';
 import { queryElement } from '$utils/queryElement';
 
 export const home = () => {
-  console.log('home');
-
   apps();
   function apps() {
     // get the component

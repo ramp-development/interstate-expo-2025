@@ -8,8 +8,6 @@ import { queryElements } from '$utils/queryElements';
 import { type Page, pages } from './pages';
 
 export const transitionIn = () => {
-  console.log('transitionIn');
-
   /**
    * IN:
    * - click transition in triggers
@@ -49,17 +47,13 @@ export const transitionIn = () => {
     loader();
   }
 
-  // homeHeroReveal();
-
   function transition() {
-    console.log('transition');
     if (loaderEl) loaderEl.remove();
     if (close) simulateEvent(close, 'click');
     transitionAnimations();
   }
 
   function loader() {
-    console.log('loader');
     if (transitionEl) transitionEl.style.display = 'none';
 
     const customEase =
@@ -108,7 +102,6 @@ export const transitionIn = () => {
   }
 
   function transitionAnimations() {
-    console.log('clicking triggers');
     // get all trigger elements
     const triggers = queryElements<HTMLDivElement>(`[${config.transitionAttr}=${config.value}]`);
     if (triggers.length === 0) return;

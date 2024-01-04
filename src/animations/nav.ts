@@ -1,7 +1,6 @@
 import { queryElement } from '$utils/queryElement';
 
 export const nav = () => {
-  console.log('nav');
   const scrollClass = 'cc-scroll';
   const nav = queryElement<HTMLDivElement>('.nav_component');
   if (!nav) return;

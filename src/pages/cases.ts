@@ -7,8 +7,6 @@ import { queryElement } from '$utils/queryElement';
 import { queryElements } from '$utils/queryElements';
 
 export const cases = () => {
-  console.log('cases');
-
   const component = queryElement<HTMLDivElement>('.cases');
   if (!component) return;
 
