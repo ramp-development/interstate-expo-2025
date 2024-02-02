@@ -25,8 +25,8 @@ export const pages: Page[] = [
     },
   },
   {
-    name: 'services',
-    slug: '/services',
+    name: 'about',
+    slug: '/about',
     loader: {
       name: 'logo',
       color: 'light',
