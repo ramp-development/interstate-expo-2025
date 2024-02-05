@@ -8,8 +8,8 @@ import * as utils from './utils';
 
 export const groups = () => {
   const defaults = { duration: 1, ease: 'power2.out', stagger: 0.1 };
-  const onload = (self) => self.progress === 1 && self.animation.progress(1);
-  const onRefresh = (self) => self.progress === 1 && self.animation.progress(1);
+  const onload = (self: any) => self.progress === 1 && self.animation.progress(1);
+  const onRefresh = (self: any) => self.progress === 1 && self.animation.progress(1);
 
   const attr = 'data-animation-element';
   const groups = queryElements<HTMLDivElement>(`[${attr}="group"]`);
@@ -42,15 +42,7 @@ export const groups = () => {
       },
     });
 
-    if (trigger !== 'transition') {
-      const groupTrigger = ScrollTrigger.create({
-        animation: timeline,
-        trigger: group,
-        start,
-        onload,
-        onRefresh,
-      });
-    } else {
+    if (trigger === 'transition') {
       // Add an event listener for the custom event
       document.addEventListener('transitionAnimationEvent', function () {
         setTimeout(() => {
@@ -58,6 +50,23 @@ export const groups = () => {
         }, 1000);
       });
     }
+
+    // if (trigger !== 'transition') {
+    //   const groupTrigger = ScrollTrigger.create({
+    //     animation: timeline,
+    //     trigger: group,
+    //     start,
+    //     onload,
+    //     onRefresh,
+    //   });
+    // } else {
+    //   // Add an event listener for the custom event
+    //   document.addEventListener('transitionAnimationEvent', function () {
+    //     setTimeout(() => {
+    //       timeline.play();
+    //     }, 1000);
+    //   });
+    // }
 
     if (title) utils.splitLines(title, timeline, '0');
     if (buttonGroup) utils.buttons(buttonGroup, timeline, '-=50%');
