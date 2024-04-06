@@ -1,24 +1,17 @@
-import { gsap } from 'gsap';
-import { Flip } from 'gsap/Flip';
+import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 
-import { animations } from './animations';
-import { initComponents } from './components';
-import { pages } from './pages';
-import { transitions } from './transitions';
+import { smoothScroll } from '$utils/smoothScroll';
+
+import { components } from './components';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  gsap.registerPlugin(Flip, ScrollTrigger, SplitText);
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
-  transitions();
-  pages();
-  initComponents();
-  animations();
+  console.log('interstate-expo-2025');
 
-  // if the page is scrolled less that 100px, scroll to the top
-  setTimeout(() => {
-    if (window.scrollY < window.innerHeight / 2) window.scrollTo(0, 0);
-  }, 800);
+  components();
+  smoothScroll();
 });

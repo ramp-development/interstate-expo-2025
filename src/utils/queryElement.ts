@@ -1,7 +1,7 @@
 /**
  * Retrieves the DOM element based on the provided query and returns them in an array
  */
-export const queryElement = <T extends HTMLElement>(
+export const queryElement = <T extends HTMLElement | SVGElement>(
   query: string,
   parent: Element | Document = document
 ): T | undefined => {
