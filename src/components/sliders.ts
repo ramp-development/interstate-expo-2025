@@ -1,5 +1,6 @@
 import Splide, { type Options } from '@splidejs/splide';
 
+import { queryElement } from '$utils/queryElement';
 import { queryElements } from '$utils/queryElements';
 
 /**
@@ -42,5 +43,26 @@ export const sliders = (): void => {
 
     const slider = new Splide(component, options);
     slider.mount();
+
+    if (!component.parentElement) return;
+    const rect = component.parentElement.getBoundingClientRect();
+    const prevArrow = queryElement('.splide__arrow--prev', component) as HTMLButtonElement;
+    const nextArrow = queryElement('.splide__arrow--next', component) as HTMLButtonElement;
+
+    component.addEventListener('mousemove', (event) => {
+      const x = event.clientX - rect.left;
+      if (x < rect.width / 2) {
+        prevArrow.style.opacity = '1';
+        nextArrow.style.opacity = '0';
+      } else {
+        prevArrow.style.opacity = '0';
+        nextArrow.style.opacity = '1';
+      }
+    });
+
+    component.addEventListener('mouseleave', () => {
+      prevArrow.style.opacity = '0';
+      nextArrow.style.opacity = '0';
+    });
   });
 };

@@ -1,5 +1,6 @@
 import { cards } from './cards';
 import { countdown } from './countdown';
+import { gallery } from './gallery';
 import { lines } from './lines';
 import { sliders } from './sliders';
 
@@ -10,4 +11,5 @@ export const components = () => {
   lines();
   sliders();
   cards();
+  gallery();
 };

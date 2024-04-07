@@ -26,6 +26,8 @@ export const lines = () => {
 
     const split = new SplitText(lines, {
       type: 'lines, words',
+      linesClass: 'split-line',
+      wordsClass: 'split-word',
     });
 
     const timeline = gsap.timeline({
