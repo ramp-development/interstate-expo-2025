@@ -13,6 +13,8 @@ export const sliders = (): void => {
   // eslint-disable-next-line no-console
   console.log('sliders');
 
+  const isRtl = queryElements('[dir="rtl"]').length > 0;
+
   const components = queryElements<HTMLDivElement>('.splide');
   components.forEach((component) => {
     const name = component.classList.contains('is-gallery')
@@ -26,6 +28,7 @@ export const sliders = (): void => {
     const options: Options = {
       pagination: false,
       gap: 0,
+      direction: isRtl ? 'rtl' : 'ltr',
     };
 
     switch (name) {
@@ -52,11 +55,9 @@ export const sliders = (): void => {
     component.addEventListener('mousemove', (event) => {
       const x = event.clientX - rect.left;
       if (x < rect.width / 2) {
-        prevArrow.style.opacity = '1';
-        nextArrow.style.opacity = '0';
+        isRtl ? showNext() : showPrev();
       } else {
-        prevArrow.style.opacity = '0';
-        nextArrow.style.opacity = '1';
+        isRtl ? showPrev() : showNext();
       }
     });
 
@@ -64,5 +65,15 @@ export const sliders = (): void => {
       prevArrow.style.opacity = '0';
       nextArrow.style.opacity = '0';
     });
+
+    function showPrev() {
+      prevArrow.style.opacity = '1';
+      nextArrow.style.opacity = '0';
+    }
+
+    function showNext() {
+      prevArrow.style.opacity = '0';
+      nextArrow.style.opacity = '1';
+    }
   });
 };
