@@ -7,6 +7,10 @@ export const smoothScroll = (): void => {
 
   lenis.on('scroll', ScrollTrigger.update);
 
+  // const { actualScroll } = lenis;
+  // lenis.scrollTo(actualScroll + 100);
+  // lenis.scrollTo(actualScroll);
+
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });

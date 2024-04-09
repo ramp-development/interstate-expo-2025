@@ -38,6 +38,11 @@ export const sliders = (): void => {
       case 'transformation':
         options.gap = '1rem';
         options.width = '80%';
+        options.breakpoints = {
+          767: {
+            width: '100%',
+          },
+        };
         break;
       case 'gigaprojects':
         options.autoWidth = true;
