@@ -40,7 +40,7 @@ export const sliders = (): void => {
         options.width = '80%';
         options.breakpoints = {
           767: {
-            width: '100%',
+            width: 'calc(100% - 1.5rem)',
           },
         };
         break;
