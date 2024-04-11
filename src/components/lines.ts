@@ -44,7 +44,7 @@ export const lines = () => {
     if (icon) timeline.from(icon, { opacity: 0, rotateZ: 20 });
 
     split.lines.forEach((line, index) => {
-      timeline.from(line.children, { yPercent: 100 }, index === 0 ? 0 : '<0.2');
+      timeline.from(line.children, { opacity: 0, yPercent: 100 }, index === 0 ? 0 : '<0.2');
     });
   });
 };
