@@ -20,7 +20,7 @@ export const countdown = (): void => {
 
   if (!days || !hours || !minutes || !seconds) return;
 
-  const target = 'December 31 2024 06:59:59 UTC+9'; //UTC+9 converts to Japan Standard time (JST)
+  const target = 'April 13 2025 06:59:59 UTC+9'; //UTC+9 converts to Japan Standard time (JST)
 
   const second = 1000,
     minute = second * 60,
